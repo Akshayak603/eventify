@@ -7,9 +7,11 @@ import json
 from flask_mail import Mail , Message
 import os
 import uuid
+import io
+import base64
 
-# Analyze
-os.environ['MPLCONFIGDIR'] = os.getcwd() + "/configs/"
+# # Analyze
+# os.environ['MPLCONFIGDIR'] = os.getcwd() + "/configs/"
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
@@ -512,9 +514,9 @@ def delete_reviews(event_id):
 def analyze_events():
     try:
         if 'user_id' in session:
-            event_vs_rating()
-            event_vs_participants()
-            return render_template('views/analyze_data.html', show=0)
+            rating_path= event_vs_rating()
+            participation_path= event_vs_participants()
+            return render_template('views/analyze_data.html',rating_path=rating_path, participation_path=participation_path, show=0)
         
         else:
 
@@ -546,17 +548,29 @@ def analyze_events_data(func=[]):
         # Rotating x-axis labels for better visibility
         plt.xticks(rotation=30, ha='right') 
 
-        # Define the folder path within the static directory
-        static_folder = os.path.join('static', 'assets','plots')
+        # local
+        # # Define the folder path within the static directory
+        # static_folder = os.path.join('static', 'assets','plots')
 
-        # Save the plot as an image file in the static folder
-        plot_path = os.path.join(static_folder,plot_collection_x_y[5])
+        # # Save the plot as an image file in the static folder
+        # plot_path = os.path.join(static_folder,plot_collection_x_y[5])
 
         # Automatically adjust subplot parameters for better layout
         plt.tight_layout()
-        plt.savefig(plot_path)
+
+        # Storing in buffer or prod
+        # Save the plot to a byte buffer
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)  # Reset the buffer position to the beginning
+
+        # Convert the image buffer to a base64-encoded string
+        image_base64 = base64.b64encode(buffer.getvalue()).decode()
 
         plt.close()
+
+        # Return the base64-encoded image string
+        return image_base64
     
     return wrapper
 
