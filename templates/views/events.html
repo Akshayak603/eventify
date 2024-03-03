@@ -1,0 +1,227 @@
+{% extends "layout.html" %} {% block body %}
+<!-- Content -->
+<div class="jumbo-container m-4">
+  <!--main content-->
+
+  <!--Organized Events Setion-->
+  <h3 class="text-white">Your Organized Events</h3>
+  <hr class="text-white" />
+  {% if events_organized|length > 0 %} {% for event in events_organized %}
+
+  <div class="row">
+    <div class="col-sm-12 m-1">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">{{event.event_name}}</h5>
+          <blockquote class="blockquote">
+            <p class="card-text">{{event.event_description}}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer float-end">
+            <strong>Organized by :</strong>
+            <cite title="Source Title">{{event.event_organizer_name}}</cite>
+          </figcaption>
+          <br />
+          <figcaption class="blockquote-footer float-end">
+            <strong>Location :</strong>
+            <cite title="Source Title">{{event.event_location}} </cite>
+            <strong>Timings :</strong>
+            <cite title="Source Title"
+              >From {{event.event_start_date}} To {{event.event_end_date}}
+            </cite>
+          </figcaption>
+          <div>
+            <!-- <a href="#" class="btn btn-success mr-3" role="button">View analytics of this Event</a> -->
+            {% if today_date > event.event_end_date %}
+            <button
+              class="btn btn-info mr-3"
+              disabled
+              >Event Completed</button
+            >
+            {% else %}
+            {% if today_date >= event.event_start_date %}
+            <a
+              class="btn btn-info mr-3"
+              role="button"
+              disabled
+              >Event Started</a
+            >
+            {% else %}
+            <a
+              href="/editEvent/{{event.event_id}}"
+              class="btn btn-info mr-3"
+              role="button"
+              >Edit</a
+            >
+            {% endif %}
+            {% endif %}
+            <a
+              href="/delete/{{event.event_id}}"
+              class="btn btn-danger mr-3"
+              role="button"
+              >Delete</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %} {% else %}
+  <div class="card">
+    <div class="card-body">
+      <p class="text-center">
+        You have not organized any events yet. So, what are you waiting for
+        <strong
+          ><a
+            role="button"
+            class="nav-link"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalCreateEvent"
+            >Click here to organize one!</a
+          ></strong
+        >
+      </p>
+    </div>
+  </div>
+  {% endif %}
+  <hr class="text-white mb-4" />
+
+  <!--Participated Events Setion-->
+  <h3 class="text-white">Your Participated Events</h3>
+  <hr class="text-white" />
+  {% if event_participated|length > 0 %} {% for event in event_participated %}
+
+  <div class="row">
+    <div class="col-sm-12 m-1">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">{{event.event_name}}</h5>
+          <blockquote class="blockquote">
+            <p class="card-text">{{event.event_description}}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer float-end">
+            <strong>Organized by :</strong>
+            <cite title="Source Title">{{event.event_organizer_name}}</cite>
+          </figcaption>
+          <br />
+          <figcaption class="blockquote-footer float-end">
+            <strong>Location :</strong>
+            <cite title="Source Title">{{event.event_location}} </cite>
+            <strong>Timings :</strong>
+            <cite title="Source Title"
+              >From {{event.event_start_date}} To {{event.event_end_date}}
+            </cite>
+          </figcaption>
+          <div>
+            {% if session['user_id'] in event.event_rating.keys() %}
+            <figcaption>
+              <cite title="Source Title"> You rated this event : </cite
+              ><strong>{{event.event_rating[session['user_id']]}}/5</strong>
+            </figcaption>
+            {% if session['user_id'] in event.event_feedback.keys() and event.event_feedback[session['user_id']]|length > 0 %}
+            <figcaption>
+              <cite title="Source Title"> Your feedback : </cite
+              ><strong>{{event.event_feedback[session['user_id']]}}</strong>
+            </figcaption>
+            {% endif %}
+            <a
+              href="/delete/review/{{event.event_id}}"
+              class="btn btn-danger mt-2"
+              role="button"
+              >Delete feedback</a>
+            {% else %}
+            {% if event.event_start_date > today_date %}
+            <a
+              href="/cancelEvent/{{event.event_id}}"
+              class="btn btn-info mr-3"
+              role="button"
+              >Cancel Event</a
+            >
+            {% else %}
+            <a
+              href="/ratefeed/{{event.event_id}}"
+              class="btn btn-info mr-3"
+              role="button"
+              >Rate this event!</a
+            >
+            {% endif %}
+
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %} {% else %}
+  <div class="card">
+    <div class="card-body">
+      <p class="text-center">
+        You have not participated in any events yet &#128549;
+      </p>
+    </div>
+  </div>
+  {% endif %}
+  <hr class="text-white mb-4" />
+
+  <!--Other Events Setion-->
+  <h3 class="text-white">Other Events</h3>
+  <hr class="text-white" />
+  {% if other_events|length > 0 %} {% for event in other_events %}
+
+  <div class="row">
+    <div class="col-sm-12 m-1">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">{{event.event_name}}</h5>
+          <figcaption class="blockquote-footer float-end">
+            <strong>Avg Rating :</strong>
+            <cite title="Source Title">{{ratings[event.event_id]}}/5</cite>
+          </figcaption>
+          <blockquote class="blockquote">
+            <p class="card-text">{{event.event_description}}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer float-end">
+            <strong>Organized by :</strong>
+            <cite title="Source Title">{{event.event_organizer_name}}</cite>
+          </figcaption>
+          <br />
+          <figcaption class="blockquote-footer float-end">
+            <strong>Location :</strong>
+            <cite title="Source Title">{{event.event_location}} </cite>
+            <strong>Timings :</strong>
+            <cite title="Source Title"
+              >From {{event.event_start_date}} To {{event.event_end_date}}
+            </cite>
+          </figcaption>
+          <div>
+            {% if event.event_start_date > today_date %}
+            <a
+              href="/registerEvent/{{event.event_id}}"
+              class="btn btn-success mr-3"
+              role="button"
+              >Join this Event!</a
+            >
+            {% else %}
+            <button
+              class="btn btn-danger mr-3"
+              disabled
+              >This event has gone</button
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %} {% else %}
+  <div class="card">
+    <div class="card-body">
+      <p class="text-center">No events right now &#128549;</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

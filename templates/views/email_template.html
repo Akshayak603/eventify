@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+</head>
+<body>
+    <h1>Hello, {{ recipient_name }}!,</h1>
+    <p>We hope this mail finds you well!! <br> Following are the details of event for which you have registered</p>
+    <ul>
+        <li>Event Name : {{event.event_name}}</li>
+        <li>Event Location : {{event.event_location}}</li>
+        <li>Event Start Timings : {{event.event_start_date}}</li>
+        <li>Event End Timings : {{event.event_end_date}}</li>
+        <li>Event Details : {{event.event_description}}</li>
+        <li>Event Organizer: {{event.event_organizer_name}}</li>
+    </ul>
+    <br>
+    <p>Thanks for choosing <strong>Eventify</strong>, Enjoy your event.</p>
+    <br>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.hide-scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0;
+}
+
+.coverpage{
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/img/fun_2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

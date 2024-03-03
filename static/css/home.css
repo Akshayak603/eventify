@@ -1,0 +1,41 @@
+.hide-scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-style{
+    color: whitesmoke;
+    font-size: large;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.strict-width{
+    max-width: 40vw;
+}
+
+.coverpage{
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/img/fun_2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set the height to fill the viewport */
+}
+
+.forgot{
+    text-decoration: none;
+    margin-top: auto;
+    float: right;
+}
