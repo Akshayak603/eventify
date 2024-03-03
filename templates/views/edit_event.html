@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Content -->
+<div class="jumbo-container jumbotron-event m-4">
+  <!--main content-->
+
+  <!--Organized Events Setion-->
+  <h3 class="text-white">Hi {{session['username']}}, edit your {{event.event_name}} event</h3>
+  <hr class="text-white">
+
+  <div class="row d-flex justify-content-center">
+
+    <div class="col-sm-6 m-3">
+      <div class="card bg-light">
+        <div class="card-body">
+
+
+            <form action="/editEvent/{{event.event_id}}" method="post" onsubmit="return validate_date()">
+                <div class="mb-3">
+                    <label for="eventname" class="col-form-label">Name</label>
+                    <input type="text" class="form-control" id="eventname" name="eventName" required value="{{ event.event_name }}">
+                </div>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Description" id="description"
+                            style="height: 100px" name="description" >{{event.event_description}}</textarea>
+                        <label for="description">Description</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="col-form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required value="{{ event.event_location }}">
+                </div>
+                <div class="mb-3">
+                    <label for="start_date" class="col-form-label">Start Date Time</label>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date" required value={{start_date_event}}>
+                </div>
+                <div class="mb-3">
+                    <label for="end_date" class="col-form-label">End Date Time</label>
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" required value={{end_date_event}}>
+                </div>
+                <div class="d-flex justify-content-evenly mt-1">
+                    <a href="/events" role="button" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

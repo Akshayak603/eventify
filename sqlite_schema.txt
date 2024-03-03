@@ -1,0 +1,38 @@
+Sqlite Tables
+
+( SQL vs NoSQL => Nosql doesnt require schema, they have key value pair not row columns, more scalability, more flexible)
+(pip install -r requirements.txt)
+
+CREATE TABLE event (
+    event_id TEXT PRIMARY KEY,
+    event_name TEXT NOT NULL,
+    event_description TEXT NOT NULL,
+    event_start_date TEXT NOT NULL,
+    event_end_date TEXT NOT NULL,
+    event_location TEXT NOT NULL,
+    event_participants TEXT, --array
+    event_organizer_id TEXT,
+    event_organizer_name TEXT,
+    event_feedback TEXT, -- object dictionary as we used in schemaless/nosql db
+    event_rating TEXT -- object dictionary as we used in schemaless/nosql db
+)
+
+CREATE TABLE user (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    events_attended TEXT,  --array
+    events_organized TEXT --array
+)
+
+CREATE TABLE password_reset_token (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    token TEXT NOT NULL UNIQUE,
+    created_at DATETIME NOT NULL,
+    expires_at DATETIME NOT_NULL
+);
+
+

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Content -->
+<div class="jumbo-container jumbotron-event m-4">
+  <!--main content-->
+
+  <!--Organized Events Setion-->
+  <h3 class="text-white">Hi {{session['username']}}, add review for {{event.event_name}} event</h3>
+  <hr class="text-white">
+
+  <div class="row d-flex justify-content-center">
+
+    <div class="col-sm-6 m-3">
+      <div class="card bg-light">
+        <div class="card-body">
+
+
+            <form action="/ratefeed/{{event.event_id}}" method="post">
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="feedback"
+                            style="height: 150px" name="feedback"></textarea>
+                        <label for="feedback">Feedback</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="rating" class="col-form-label">Rating</label>
+                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5"
+                        placeholder="Rate from 1 to 5" />
+                </div>
+                <div class="d-flex justify-content-evenly mt-1">
+                    <a href="/events" role="button" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
