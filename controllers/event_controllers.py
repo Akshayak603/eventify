@@ -9,6 +9,7 @@ import os
 import uuid
 
 # Analyze
+os.environ['MPLCONFIGDIR'] = os.getcwd() + "/configs/"
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
