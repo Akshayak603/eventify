@@ -109,5 +109,5 @@ app.route('/forgotpassword', methods=['GET','POST'])(forgot_password)
 app.route('/resetpassword/<token>',methods=['GET','POST'])(reset_password)
 
 # all other roots or exception where its not found
-app.register_error_handler(Exception,handle_404)
+# app.register_error_handler(Exception,handle_404)
 
