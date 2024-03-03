@@ -18,7 +18,7 @@
                 <p class="fs-3"> <span class="text-danger">Opps!</span></p>
                 <p class="lead">
                     Something went wrong either from your side or our side, kindly try again later.
-                    Error: {error}
+                    Error: {{error.statusCode}} - {{ error.message }}
                   </p>
                 <a href="/" class="btn btn-primary">Go Home</a>
             </div>
