@@ -4,11 +4,12 @@
 }
 
 html, body {
-    height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .text-style{
@@ -18,10 +19,6 @@ html, body {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-}
-
-.strict-width{
-    max-width: 40vw;
 }
 
 .coverpage{
