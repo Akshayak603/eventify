@@ -8,8 +8,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
 }
 
 .text-style{
@@ -28,7 +26,7 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh; /* Set the height to fill the viewport */
+    height: auto; /* Set the height to fill the viewport */
 }
 
 .forgot{
