@@ -5,9 +5,12 @@
 
 html, body {
     margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .text-style{
@@ -26,7 +29,7 @@ html, body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: auto; /* Set the height to fill the viewport */
+    height: 100vh;
 }
 
 .forgot{
