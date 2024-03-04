@@ -17,7 +17,7 @@
             <div class="card bg-light">
                 <div class="card-body">
                     <div class="mb-3">
-                        <img src="{{ url_for('static', filename='assets/plots/event_ratings.png') }}" alt="Event Ratings" class="card-img" />
+                        <img src="data:image/png;base64,{{ rating_path }}" alt="Event Ratings" class="card-img" />
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="card bg-light">
                 <div class="card-body">
                     <div class="mb-3">
-                        <img src="{{ url_for('static', filename='assets/plots/event_participations.png') }}" alt="Event Participations" class="card-img">
+                        <img src="data:image/png;base64,{{ participation_path }}" alt="Event Participations" class="card-img">
                     </div>
                 </div>
             </div>

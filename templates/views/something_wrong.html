@@ -18,9 +18,7 @@
                 <p class="fs-3"> <span class="text-danger">Opps!</span></p>
                 <p class="lead">
                     Something went wrong either from your side or our side, kindly try again later.
-                    {% if 'SSL connection has been closed unexpectedly' in error}
-                    Error: Server Error
-                    {% end if %}
+                    Error: {{error}}
                   </p>
                 <a href="/" class="btn btn-primary">Go Home</a>
             </div>
